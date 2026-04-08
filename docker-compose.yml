@@ -1,0 +1,44 @@
+services:
+  aggregator:
+    build: .
+    container_name: aegis_aggregator
+    command: python secure_aggregator/server.py
+    networks:
+      - aegis_net
+    ports:
+      - "8080:8080"
+
+  hospital_alpha:
+    build: .
+    container_name: aegis_node_1
+    command: python edge_nodes/client.py
+    environment:
+      - NODE_ID=Hospital_Alpha
+    depends_on:
+      - aggregator
+    networks:
+      - aegis_net
+
+  hospital_beta:
+    build: .
+    container_name: aegis_node_2
+    command: python edge_nodes/client.py
+    environment:
+      - NODE_ID=Hospital_Beta
+    depends_on:
+      - aggregator
+    networks:
+      - aegis_net
+
+  command_center:
+    build: .
+    container_name: aegis_dashboard
+    command: streamlit run command_center/app.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    networks:
+      - aegis_net
+
+networks:
+  aegis_net:
+    driver: bridge

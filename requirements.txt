@@ -1,0 +1,8 @@
+torch
+torchvision
+flwr==1.8.0
+opacus
+streamlit
+pandas
+plotly
+numpy

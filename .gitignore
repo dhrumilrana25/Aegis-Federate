@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+aegis_env/
+.venv/
+
+# Environment / Secrets
+.env
+.flaskenv
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Docker
+.docker/
+*.log
+
+# WSL/Disk Images
+*.vhdx
+*.tar
+
+# Data (Keep the folder, ignore the files)
+data/*.csv
+data/*.npy
+data/*.pth
